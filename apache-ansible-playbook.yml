@@ -1,0 +1,15 @@
+---
+- hosts: all
+
+  remote_user: root
+  tasks:
+    - name: instalar apache2
+      apt: name=apache2 state=latest
+
+    - name: comprobar que apache2 este funcionando
+      service: name=apache2 state=started
+    
+
+
+
+...
