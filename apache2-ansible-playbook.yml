@@ -1,0 +1,30 @@
+---
+- hosts: all
+
+  remote_user: root
+  tasks:
+    - name: instalar apache2
+      apt: name=apache2 state=latest
+      
+      
+
+    - name: comprobar que apache2 este funcionando
+      service: name=apache2 state=restarted
+      notify: cod_html
+  
+  handlers:
+    - name: cod_html
+      copy:
+        src: ./ansible.html
+        dest: /var/www/html/
+        owner: www-data
+        group: www-data
+
+
+
+
+
+
+
+
+...
