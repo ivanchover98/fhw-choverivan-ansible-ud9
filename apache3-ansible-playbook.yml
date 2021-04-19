@@ -1,0 +1,34 @@
+---
+- hosts: fhw
+
+  remote_user: root
+  tasks:
+    - name: instalar apache2
+      apt: name=apache2 state=latest
+      
+      
+
+    - name: comprobar que apache2 este funcionando
+      service: name=apache2 state=restarted
+      notify: cod_html
+
+    - name: echo message
+      ansible.builtin.command: echo {{message}}
+        
+  
+  handlers:
+    - name: cod_html
+      copy:
+        src: ./ansible.html
+        dest: /var/www/html/
+        owner: www-data
+        group: www-data
+
+
+
+
+
+
+
+
+...
